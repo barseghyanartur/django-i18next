@@ -113,7 +113,7 @@ Demo
 ===============================================
 Live demo
 -----------------------------------------------
-See the `live demo app <https://django-i18next.herokuapp.com/>`_ on Heroku.
+See the `live demo app <https://django-i18next.herokuapp.com/nl/>`_ on Heroku.
 
 Run demo locally
 -----------------------------------------------
