@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 __title__ = 'i18next.testing.test_core'
 __author__ = 'Artur Barseghyan <artur.barseghyan@gmail.com>'
 __copyright__ = '2015 Artur Barseghyan'
@@ -26,6 +28,7 @@ class I18NextCoreTest(TestCase):
         self.soup = BeautifulSoup(self.response.content)
 
         self.link_overridelocale_en_text = text_type('Log in')
+        self.link_overridelocale_ru_text = text_type(u'Войти')
         self.link_normal_text = text_type('Inloggen')
         self.link_disabletranslations_text = text_type('Log in')
 
@@ -63,6 +66,19 @@ class I18NextCoreTest(TestCase):
         self.assertEqual(link_disabletranslations.text,
                          self.link_disabletranslations_text)
         return link_disabletranslations.text
+
+    @print_info
+    def test_04_overridelocale_ru_while_when_set_to_nl(self):
+        """
+        Test ``overridelocale`` ru when visiting Dutch site (locale==nl).
+        """
+        link_overridelocale_ru = self.soup.find(
+            'a',
+            attrs={'class': 'overridelocale-ru'}
+            )
+        self.assertEqual(link_overridelocale_ru.text,
+                         self.link_overridelocale_ru_text)
+        return link_overridelocale_ru.text
 
 
 if __name__ == '__main__':

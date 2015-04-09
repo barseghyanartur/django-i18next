@@ -90,11 +90,6 @@ Live demo
 -----------------------------------------------
 See the `live demo app <https://django-i18next.herokuapp.com/>`_ on Heroku.
 
-Credentials:
-
-- username: test_user
-- password: test_user
-
 Run demo locally
 -----------------------------------------------
 In order to be able to quickly evaluate the `Fobi`, a demo app (with a quick
@@ -118,17 +113,7 @@ Assign execute rights to the installer and run the
 
 Open your browser and test the app.
 
-Dashboard:
-
-- URL: http://127.0.0.1:8001/fobi/
-- Admin username: test_admin
-- Admin password: test
-
-Django admin interface:
-
-- URL: http://127.0.0.1:8001/admin/
-- Admin username: test_admin
-- Admin password: test
+- URL: http://127.0.0.1:8001/nl/
 
 If quick installer doesn't work for you, see the manual steps on running the
 `example project

@@ -1,7 +1,7 @@
 Django>=1.5,<1.7
+beautifulsoup4
 Jinja2
 MarkupSafe
-MySQL-python
 South
 Sphinx
 django-debug-toolbar==0.11.0

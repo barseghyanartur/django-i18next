@@ -1,5 +1,5 @@
 Django>=1.7,<1.8
-
+beautifulsoup4
 Jinja2
 MarkupSafe
 Sphinx
@@ -8,7 +8,6 @@ django-localeurl>=2.0.2
 docutils
 ipdb
 ipython
-ordereddict>=1.1
 # Selenium shall always be upgraded
 selenium
 simple-timer>=0.2

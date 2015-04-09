@@ -33,12 +33,10 @@ except:
 #for locale_dir in locale_dirs:
 #    locale_files += [os.path.join(locale_dir, f) for f in os.listdir(locale_dir)]
 
-version = '0.1'
+version = '0.1.1'
 
 install_requires = [
-    'ordereddict>=1.1',
     'six>=1.4.1',
-    'Unidecode>=0.04.1',
     'django-nine>=0.1.1',
 ]
 
@@ -79,7 +77,7 @@ setup(
         "Framework :: Django",
         "Intended Audience :: Developers",
         "Operating System :: OS Independent",
-        "Development Status :: 3 - Alpha",
+        "Development Status :: 4 - Beta",
     ],
     keywords = "django, i18n, internationalisation",
     author = 'Artur Barseghyan',

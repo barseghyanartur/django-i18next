@@ -1,4 +1,5 @@
-Django>=1.5,<1.9
+Django>=1.4,<1.9
+beautifulsoup4
 Jinja2
 MarkupSafe
 South
