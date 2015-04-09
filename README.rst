@@ -84,14 +84,6 @@ certain part of your template using the ``disabletranslations`` template tag.
         </p>
     {% enddisabletranslations %}
 
-Tuning
-===============================================
-There are number of Dash settings you can override in the settings module of
-your Django project:
- - 
-
-For tuning of specific contrib plugin, see the docs in the plugin directory.
-
 Demo
 ===============================================
 Live demo
@@ -146,10 +138,6 @@ Debugging
 ===============================================
 By default debugging is turned off. Set the ``I18NEXT_DEBUG`` to True
 in the ``settings.py`` of your project in order to do so.
-
-Troubleshooting
-===============================================
-
 
 License
 ===============================================

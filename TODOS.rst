@@ -9,8 +9,8 @@ worked on.
 
 Must haves
 ===============================================
-- Django 1.5, 1.6, 1.7 and 1.8 support.
-- Add tox tests.
++ Django 1.5, 1.6, 1.7 and 1.8 support.
++ Add tox tests.
 + Template tag to force certain locale for the block. Should be like:
   {% overridelocale [language_code] %}...{% endoverridelocale %}
 + Template tag to disable translations for the block. Should be like:

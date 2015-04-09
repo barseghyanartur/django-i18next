@@ -10,7 +10,6 @@ from six import text_type
 from bs4 import BeautifulSoup
 
 from django.test import TestCase, Client
-from django.utils.translation import ugettext
 
 from i18next.testing.base import print_info
 from i18next.testing.helpers import setup_i18next
