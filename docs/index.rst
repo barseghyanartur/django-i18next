@@ -55,9 +55,38 @@ Override locale
 No matter what your current locale is, you can override it for a certain part
 of your template using the ``overridelocale`` template tag.
 
+Load the templatetags.
+
 .. code-block:: html
 
     {% load i18n i18next %}
+
+The following code forces Dutch locale for whatever is put inside the
+``overridelocale`` block.
+
+.. code-block:: html
+
+    {% overridelocale 'nl' %}
+        <p>
+            <a href="/login/">{% trans "Log in" %}</a>
+        </p>
+    {% endoverridelocale %}
+
+The following code forces Russian locale for whatever is put inside the
+``overridelocale`` block.
+
+.. code-block:: html
+
+    {% overridelocale 'ru' %}
+        <p>
+            <a href="/login/">{% trans "Log in" %}</a>
+        </p>
+    {% endoverridelocale %}
+
+The following code forces English locale for whatever is put inside the
+``overridelocale`` block.
+
+.. code-block:: html
 
     {% overridelocale 'en' %}
         <p>
