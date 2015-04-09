@@ -35,11 +35,7 @@ Or latest stable version from BitBucket:
 
     $ pip install -e hg+https://bitbucket.org/barseghyanartur/django-i18next@stable#egg=django-i18next
 
-(2) Add `fobi` to ``INSTALLED_APPS`` of the your projects' Django settings.
-    Furthermore, all themes and plugins to be used, shall be added to the
-    ``INSTALLED_APPS`` as well. Note, that if a plugin has additional
-    dependencies, you should be mentioning those in the ``INSTALLED_APPS``
-    as well.
+(2) Add `i18next` to ``INSTALLED_APPS`` of the your projects' Django settings.
 
 .. code-block:: python
 
@@ -92,12 +88,12 @@ See the `live demo app <https://django-i18next.herokuapp.com/>`_ on Heroku.
 
 Run demo locally
 -----------------------------------------------
-In order to be able to quickly evaluate the `Fobi`, a demo app (with a quick
-installer) has been created (works on Ubuntu/Debian, may work on other Linux
-systems as well, although not guaranteed). Follow the instructions below for
-having the demo running within a minute.
+In order to be able to quickly evaluate the `django-i18next`, a demo app (with
+a quick installer) has been created (works on Ubuntu/Debian, may work on other
+Linux systems as well, although not guaranteed). Follow the instructions below
+for having the demo running within a minute.
 
-Grab the latest `django_fobi_example_app_installer.sh`:
+Grab the latest `django_i18next_example_app_installer.sh`:
 
 .. code-block:: none
 
