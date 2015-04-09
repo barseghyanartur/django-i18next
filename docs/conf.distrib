@@ -268,7 +268,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
   ('index', 'django-i18next', u'django-i18next Documentation',
-   u'Artur Barseghyan <artur.barseghyan@gmail.com>', 'django-i18next', 'Additions to Django's i18n module.',
+   u'Artur Barseghyan <artur.barseghyan@gmail.com>', 'django-i18next', "Additions to Django's i18n module.",
    'Miscellaneous'),
 ]
 
