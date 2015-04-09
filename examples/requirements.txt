@@ -1,0 +1,14 @@
+Django>=1.5,<1.9
+Jinja2
+MarkupSafe
+South
+Sphinx
+django-debug-toolbar>=0.11.0
+django-localeurl>=2.0.2
+docutils
+ipdb
+ipython
+# Selenium shall always be upgraded
+selenium
+simple-timer>=0.2
+tox

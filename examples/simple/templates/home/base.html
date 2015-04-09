@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load i18n i18next %}
+
+{% block nav-menu %}
+<ul class="button-group">
+
+{% overridelocale 'en' %}
+<li><a href="#" class="button overridelocale-en">{% trans "Log in" %}</a></li>
+{% endoverridelocale %}
+
+<li><a href="#" class="button normal">{% trans "Log in" %}</a></li>
+
+{% disabletranslations %}
+<li><a href="#" class="button disabletranslations">{% trans "Log in" %}</a></li>
+{% enddisabletranslations %}
+
+</ul>
+{% endblock nav-menu %}

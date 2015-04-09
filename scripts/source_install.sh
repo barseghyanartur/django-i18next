@@ -1,0 +1,1 @@
+pip install -e hg+https://bitbucket.org/barseghyanartur/django-i18next#egg=django-i18next

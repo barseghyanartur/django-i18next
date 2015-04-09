@@ -1,0 +1,18 @@
+
+Documentation
+===============================================
+Contents:
+
+.. toctree::
+   :maxdepth: 20
+
+   fobi
+   quickstart
+
+Indices and tables
+===============================================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
+
