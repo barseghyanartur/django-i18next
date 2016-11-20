@@ -5,6 +5,7 @@ syntax: regexp
 \.git/
 \.tox/
 \.travis\.yml~
+\.cache/
 
 ^MANIFEST\.in~
 ^tmp/
