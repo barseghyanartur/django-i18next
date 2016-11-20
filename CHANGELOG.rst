@@ -1,5 +1,5 @@
 Release history and notes
-=====================================
+=========================
 `Sequence based identifiers
 <http://en.wikipedia.org/wiki/Software_versioning#Sequence-based_identifiers>`_
 are used for versioning (schema follows below):
@@ -15,8 +15,15 @@ are used for versioning (schema follows below):
   0.3.4 to 0.4).
 - All backwards incompatible changes are mentioned in this document.
 
+0.1.2
+-----
+2016-11-20
+
+- Compatibility with Django 1.9 and 1.10.
+- Minor improvements and code clean-up.
+
 0.1.1
--------------------------------------
+-----
 2015-04-09
 
 - Clean up requirements.
@@ -24,7 +31,7 @@ are used for versioning (schema follows below):
 - Change status to beta.
 
 0.1
--------------------------------------
+---
 2015-04-09
 
 - Initial release.

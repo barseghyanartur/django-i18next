@@ -5,6 +5,8 @@
 .hgtags
 .tox/
 .travis.yml~
+.cache/
+.coverage
 
 MANIFEST.in~
 MIND_BUCKET.rst
@@ -28,7 +30,8 @@ QUICK_START.rst
 /build/
 /dist/
 /src/django_i18next.egg-info
-/examples/simple/local_settings.py
+/examples/simple/settings/__init__.py
+/examples/simple/settings/local_settings.py
 /examples/quickstart/local_settings.py
 /examples/quick_start/db.sqlite3
 /examples/quickstart/

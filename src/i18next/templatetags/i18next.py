@@ -1,30 +1,46 @@
 from __future__ import absolute_import
 
+from django.utils import translation
+
+from nine import versions
+
+if versions.DJANGO_GTE_1_9:
+    from django.template import (
+        Library,
+        Node,
+        TemplateSyntaxError
+    )
+else:
+    from django.template.base import (
+        Library,
+        Node,
+        TemplateSyntaxError
+    )
+
 __title__ = 'i18next.templatetags.i18next'
 __author__ = 'Artur Barseghyan <artur.barseghyan@gmail.com>'
-__copyright__ = '2015 Artur Barseghyan'
+__copyright__ = '2015-2016 Artur Barseghyan'
 __license__ = 'GPL 2.0/LGPL 2.1'
 __all__ = (
-    'OverrideLocaleNode', 'overridelocale', 'DisableTranslationsNode',
+    'OverrideLocaleNode',
+    'overridelocale',
+    'DisableTranslationsNode',
     'disabletranslations',
 )
 
-from django.template.base import (
-    Library, Node, TemplateSyntaxError
-    )
-from django.utils import translation
-
 register = Library()
 
+
 class OverrideLocaleNode(Node):
-    """
-    Node for ``overridelocale``.
-    """
+    """Node for ``overridelocale``."""
+
     def __init__(self, language_code, nodelist):
+        """Constructor."""
         self.language_code = language_code
         self.nodelist = nodelist
 
     def render(self, context):
+        """Render."""
         language_code = self.language_code.resolve(context)
         with translation.override(language_code):
             return self.nodelist.render(context)
@@ -32,8 +48,7 @@ class OverrideLocaleNode(Node):
 
 @register.tag
 def overridelocale(parser, token):
-    """
-    Overrides locale for certain code block.
+    """Override locale for certain code block.
 
     Example usage::
 
@@ -57,13 +72,14 @@ def overridelocale(parser, token):
 
 
 class DisableTranslationsNode(Node):
-    """
-    Node for ``disabletranslations``.
-    """
+    """Node for ``disabletranslations``."""
+
     def __init__(self, nodelist):
+        """Constructor."""
         self.nodelist = nodelist
 
     def render(self, context):
+        """Render."""
         current_language = translation.get_language()
 
         translation.deactivate_all()
@@ -74,10 +90,10 @@ class DisableTranslationsNode(Node):
 
         return rendered
 
+
 @register.tag
 def disabletranslations(parser, token):
-    """
-    Disables translations for the block.
+    """Disable translations for the block.
 
     Example usage::
 

@@ -1,7 +1,11 @@
 # Django settings for example project.
 import os
-PROJECT_DIR = lambda base : os.path.abspath(os.path.join(os.path.dirname(__file__), base).replace('\\','/'))
-gettext = lambda s: s
+import sys
+
+from nine import versions
+
+from .core import PROJECT_DIR, gettext
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -9,6 +13,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 DEBUG = False
 DEBUG_TOOLBAR = False
 TEMPLATE_DEBUG = DEBUG
+DEV = False
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -18,19 +23,24 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': PROJECT_DIR('../db/example.db'), # Or path to database file if using sqlite3.
+        # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'ENGINE': 'django.db.backends.sqlite3',
+        # Or path to database file if using sqlite3.
+        'NAME': PROJECT_DIR(os.path.join('..', '..', 'db', 'example.db')),
         # The following settings are not used with sqlite3:
         'USER': '',
         'PASSWORD': '',
-        'HOST': '', # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '', # Set to empty string for default.
+        # Empty for localhost through domain sockets or '127.0.0.1' for
+        # localhost through TCP.
+        'HOST': '',
+        # Set to empty string for default.
+        'PORT': '',
     }
 }
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ['*',]
+ALLOWED_HOSTS = ['*']
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -40,10 +50,10 @@ TIME_ZONE = 'America/Chicago'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-#LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
 
 LANGUAGES = (
-    ('en', gettext("English")), # Main language!
+    ('en', gettext("English")),  # Main language!
     ('hy', gettext("Armenian")),
     ('nl', gettext("Dutch")),
     ('ru', gettext("Russian")),
@@ -65,7 +75,7 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
-MEDIA_ROOT = PROJECT_DIR(os.path.join('..', 'media'))
+MEDIA_ROOT = PROJECT_DIR(os.path.join('..', '..', 'media'))
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -76,7 +86,7 @@ MEDIA_URL = '/media/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = PROJECT_DIR(os.path.join('..', 'static'))
+STATIC_ROOT = PROJECT_DIR(os.path.join('..', '..', 'static'))
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
@@ -87,7 +97,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    PROJECT_DIR(os.path.join('..', 'media', 'static')),
+    PROJECT_DIR(os.path.join('..', '..', 'media', 'static')),
 )
 
 # List of finder classes that know how to find static files in
@@ -95,22 +105,100 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '97818c*w97Zi8a-m^1coRRrmurMI6+q5_kyn*)s@(*_Pk6q423'
 
-# List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-    'django.template.loaders.eggs.Loader',
-)
+try:
+    from .local_settings import DEBUG_TEMPLATE
+except Exception as err:
+    DEBUG_TEMPLATE = False
+
+if versions.DJANGO_GTE_1_10:
+    TEMPLATES = [
+        {
+            'BACKEND': 'django.template.backends.django.DjangoTemplates',
+            # 'APP_DIRS': True,
+            'DIRS': [PROJECT_DIR(os.path.join('..', 'templates'))],
+            'OPTIONS': {
+                'context_processors': [
+                    "django.template.context_processors.debug",
+                    'django.template.context_processors.request',
+                    "django.contrib.auth.context_processors.auth",
+                    "django.contrib.messages.context_processors.messages",
+                    # "context_processors.testing",  # Testing
+                ],
+                'loaders': [
+                    'django.template.loaders.filesystem.Loader',
+                    'django.template.loaders.app_directories.Loader',
+                    'django.template.loaders.eggs.Loader',
+                ],
+                'debug': DEBUG_TEMPLATE,
+            }
+        },
+    ]
+elif versions.DJANGO_GTE_1_8:
+    TEMPLATES = [
+        {
+            'BACKEND': 'django.template.backends.django.DjangoTemplates',
+            # 'APP_DIRS': True,
+            'DIRS': [PROJECT_DIR(os.path.join('..', 'templates'))],
+            'OPTIONS': {
+                'context_processors': [
+                    "django.contrib.auth.context_processors.auth",
+                    "django.template.context_processors.debug",
+                    "django.template.context_processors.i18n",
+                    "django.template.context_processors.media",
+                    "django.template.context_processors.static",
+                    "django.template.context_processors.tz",
+                    "django.contrib.messages.context_processors.messages",
+                    "django.template.context_processors.request",
+                    # "context_processors.testing",  # Testing
+                ],
+                'loaders': [
+                    'django.template.loaders.filesystem.Loader',
+                    'django.template.loaders.app_directories.Loader',
+                    'django.template.loaders.eggs.Loader',
+                ],
+                'debug': DEBUG_TEMPLATE,
+            }
+        },
+    ]
+else:
+    TEMPLATE_DEBUG = DEBUG_TEMPLATE
+
+    # List of callables that know how to import templates from various
+    # sources.
+    TEMPLATE_LOADERS = (
+        'django.template.loaders.filesystem.Loader',
+        'django.template.loaders.app_directories.Loader',
+        'django.template.loaders.eggs.Loader',
+    )
+
+    TEMPLATE_CONTEXT_PROCESSORS = (
+        "django.contrib.auth.context_processors.auth",
+        "django.core.context_processors.debug",
+        "django.core.context_processors.i18n",
+        "django.core.context_processors.media",
+        "django.core.context_processors.static",
+        "django.core.context_processors.tz",
+        "django.contrib.messages.context_processors.messages",
+        "django.core.context_processors.request",
+    )
+
+    TEMPLATE_DIRS = (
+        # Put strings here, like "/home/html/django_templates" or
+        # "C:/www/django/templates".
+        # Always use forward slashes, even on Windows.
+        # Don't forget to use absolute paths, not relative paths.
+        PROJECT_DIR(os.path.join('..', 'templates')),
+    )
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'localeurl.middleware.LocaleURLMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -124,27 +212,9 @@ ROOT_URLCONF = 'urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'wsgi.application'
 
-TEMPLATE_CONTEXT_PROCESSORS = (
-    "django.contrib.auth.context_processors.auth",
-    "django.core.context_processors.debug",
-    "django.core.context_processors.i18n",
-    "django.core.context_processors.media",
-    "django.core.context_processors.static",
-    "django.core.context_processors.tz",
-    "django.contrib.messages.context_processors.messages",
-    "django.core.context_processors.request",
-)
-
-TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-    PROJECT_DIR('templates'),
-)
-
-#FIXTURE_DIRS = (
+# FIXTURE_DIRS = (
 #   PROJECT_DIR(os.path.join('..', 'fixtures'))
-#)
+# )
 
 INSTALLED_APPS = [
     # Django core and contrib apps
@@ -157,8 +227,6 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.sitemaps',
 
-    'localeurl', # Locale URL
-
     # ***********************************************************************
     # ***********************************************************************
     # **************************** i18next core *****************************
@@ -167,27 +235,23 @@ INSTALLED_APPS = [
     'i18next',
 
     # Other project specific apps
-    'foo', # Test app
+    'foo',  # Test app
 ]
 
-from nine.versions import DJANGO_LTE_1_6
+# if versions.DJANGO_LTE_1_6:
+#     INSTALLED_APPS.append('south')
 
-if DJANGO_LTE_1_6:
-    INSTALLED_APPS.append('south')
-
-#LOGIN_URL = '/accounts/login/'
-#LOGIN_ERROR_URL = '/accounts/login/'
-#LOGOUT_URL = '/accounts/logout/'
-
-# Tell localeurl to use sessions for language store.
-LOCALEURL_USE_SESSION = True
+LOGIN_URL = '/en/accounts/login/'
+LOGIN_ERROR_URL = '/en/accounts/login/'
+LOGOUT_URL = '/en/accounts/logout/'
+LOGIN_REDIRECT_URL = '/en/'
 
 # localeurl locale independent paths (language code won't be appended)
-LOCALE_INDEPENDENT_PATHS = (
-    r'^/sitemap.*\.xml$', # Global regex for all XML sitemaps
-    r'^/admin/',
-    #r'^/dashboard/',
-)
+# LOCALE_INDEPENDENT_PATHS = (
+#     r'^/sitemap.*\.xml$', # Global regex for all XML sitemaps
+#     r'^/admin/',
+#     #r'^/dashboard/',
+# )
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -208,7 +272,8 @@ LOGGING = {
     },
     'formatters': {
         'verbose': {
-            'format': '\n%(levelname)s %(asctime)s [%(pathname)s:%(lineno)s] %(message)s'
+            'format': '\n%(levelname)s %(asctime)s [%(pathname)s:%(lineno)s] '
+                      '%(message)s'
         },
         'simple': {
             'format': '\n%(levelname)s %(message)s'
@@ -226,33 +291,33 @@ LOGGING = {
             'formatter': 'verbose'
         },
         'all_log': {
-            'level':'DEBUG',
-            'class':'logging.handlers.RotatingFileHandler',
-            'filename': PROJECT_DIR("../logs/all.log"),
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': PROJECT_DIR("../../logs/all.log"),
             'maxBytes': 1048576,
             'backupCount': 99,
             'formatter': 'verbose',
         },
         'django_log': {
-            'level':'DEBUG',
-            'class':'logging.handlers.RotatingFileHandler',
-            'filename': PROJECT_DIR("../logs/django.log"),
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': PROJECT_DIR("../../logs/django.log"),
             'maxBytes': 1048576,
             'backupCount': 99,
             'formatter': 'verbose',
         },
         'django_request_log': {
-            'level':'DEBUG',
-            'class':'logging.handlers.RotatingFileHandler',
-            'filename': PROJECT_DIR("../logs/django_request.log"),
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': PROJECT_DIR("../../logs/django_request.log"),
             'maxBytes': 1048576,
             'backupCount': 99,
             'formatter': 'verbose',
         },
         'i18next_log': {
-            'level':'DEBUG',
-            'class':'logging.handlers.RotatingFileHandler',
-            'filename': PROJECT_DIR("../logs/i18next.log"),
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': PROJECT_DIR("../../logs/i18next.log"),
             'maxBytes': 1048576,
             'backupCount': 99,
             'formatter': 'verbose',
@@ -279,7 +344,7 @@ LOGGING = {
 
 # Do not put any settings below this line
 try:
-    from local_settings import *
+    from .local_settings import *
 except:
     pass
 
@@ -307,7 +372,7 @@ if DEBUG and TEMPLATE_DEBUG:
     try:
         # Make sure the django-template-debug is installed. You can then
         # in templates use it as follows:
-        # 
+        #
         # {% load debug_tags %}
         # {% set_trace %}
         import template_debug
@@ -316,3 +381,10 @@ if DEBUG and TEMPLATE_DEBUG:
         )
     except ImportError:
         pass
+
+
+# Make the `django-i18next` package available without installation.
+if DEV:
+    i18next_source_path = os.environ.get('I18NEXT_SOURCE_PATH', 'src')
+    # sys.path.insert(0, os.path.abspath('src'))
+    sys.path.insert(0, os.path.abspath(i18next_source_path))

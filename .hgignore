@@ -20,8 +20,8 @@ syntax: regexp
 ^examples/logs/
 ^examples/media/cache/
 ^examples/static/
-^examples/simple/local_settings\.py
-^examples/simple/local_settings_foundation5\.py
+^examples/simple/settings/local_settings\.py
+^examples/simple/settings/__init__\.py
 ^examples/quickstart/local_settings\.py
 ^builddocs/
 ^builddocs\.zip

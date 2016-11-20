@@ -1,6 +1,6 @@
-===============================================
+=====
 TODOs
-===============================================
+=====
 Based on the MoSCoW principle. Must haves and should haves are planned to be
 worked on.
 
@@ -8,7 +8,7 @@ worked on.
 * Features/issues marked with minus (-) are yet to be implemented.
 
 Must haves
-===============================================
+==========
 + Django 1.5, 1.6, 1.7 and 1.8 support.
 + Add tox tests.
 + Template tag to force certain locale for the block. Should be like:
@@ -17,12 +17,12 @@ Must haves
   {% disabletranslations %}...{% enddisabletranslations %}
 
 Should haves
-===============================================
+============
 + Add Django 1.4 support.
 
 Could haves
-===============================================
+===========
 
 
 Would haves
-===============================================
+===========
