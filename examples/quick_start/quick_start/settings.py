@@ -60,7 +60,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
         'django.core.context_processors.tz',
         'django.contrib.messages.context_processors.messages',
 
-        # Required by ``fobi``.
+        # Required by ``i18next``.
         "django.core.context_processors.request",
 )
 

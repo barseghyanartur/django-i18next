@@ -6,6 +6,7 @@ syntax: regexp
 \.tox/
 \.travis\.yml~
 \.cache/
+\.coverage
 
 ^MANIFEST\.in~
 ^tmp/

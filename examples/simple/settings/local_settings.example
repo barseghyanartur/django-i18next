@@ -15,8 +15,8 @@ DATABASES = {
         # Or path to database file if using sqlite3.
         'NAME': PROJECT_DIR('../../db/example.db'),
         # 'ENGINE': 'django.db.backends.mysql',
-        # 'NAME': 'fobi',
-        # 'TEST_NAME': 'fobi_test',
+        # 'NAME': 'i18next',
+        # 'TEST_NAME': 'i18next_test',
         # The following settings are not used with sqlite3:
         'USER': 'root',
         'PASSWORD': 'test',
@@ -33,7 +33,7 @@ INTERNAL_IPS = ('127.0.0.1',)
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = PROJECT_DIR('../../tmp')
 
-DEFAULT_FROM_EMAIL = '<no-reply@dev.django-fobi.mail.example.com>'
+DEFAULT_FROM_EMAIL = '<no-reply@dev.django-i18next.mail.example.com>'
 
 I18NEXT_DEBUG = True
 

@@ -17,10 +17,17 @@ __all__ = (
 )
 
 
-logger = logging.getLogger(__name__)
+LOGGER = logging.getLogger(__name__)
 
 LOG_INFO = True
 TRACK_TIME = False
+
+if TRACK_TIME:
+    try:
+        import simple_timer
+    except ImportError as err:
+        simple_timer = None
+        TRACK_TIME = False
 
 
 def log_info(func):
@@ -31,7 +38,6 @@ def log_info(func):
     def inner(self, *args, **kwargs):
         """Inner."""
         if TRACK_TIME:
-            import simple_timer
             timer = simple_timer.Timer()  # Start timer
 
         result = func(self, *args, **kwargs)
@@ -39,16 +45,16 @@ def log_info(func):
         if TRACK_TIME:
             timer.stop()  # Stop timer
 
-        logger.info('\n{0}'.format(func.__name__))
-        logger.info('============================')
+        LOGGER.info('\n{0}'.format(func.__name__))
+        LOGGER.info('============================')
         if func.__doc__:
-            logger.info('""" {0} """'.format(func.__doc__.strip()))
-        logger.info('----------------------------')
+            LOGGER.info('""" {0} """'.format(func.__doc__.strip()))
+        LOGGER.info('----------------------------')
         if result is not None:
-            logger.info(result)
+            LOGGER.info(result)
         if TRACK_TIME:
-            logger.info('done in {0} seconds'.format(timer.duration))
-        logger.info('\n')
+            LOGGER.info('done in {0} seconds'.format(timer.duration))
+        LOGGER.info('\n')
 
         return result
     return inner
