@@ -18,9 +18,11 @@ def get_setting(setting, override=None):
         to None.
     :return: Setting value.
     """
-    if override is not None:
-        return override
-    if hasattr(settings, 'I18NEXT_{0}'.format(setting)):
-        return getattr(settings, 'I18NEXT_{0}'.format(setting))
+    attr_name = 'I18NEXT_{0}'.format(setting)
+    if hasattr(settings, attr_name):
+        return getattr(settings, attr_name)
     else:
-        return getattr(defaults, setting)
+        if hasattr(defaults, setting):
+            return getattr(defaults, setting)
+        else:
+            return override
