@@ -25,7 +25,7 @@ class I18NextCoreTest(TestCase):
         client = Client()
 
         self.response = client.get('/nl/')
-        self.soup = BeautifulSoup(self.response.content)
+        self.soup = BeautifulSoup(getattr(self.response, 'content', ''))
 
         self.link_overridelocale_en_text = text_type('Log in')
         self.link_overridelocale_ru_text = text_type(u'Войти')

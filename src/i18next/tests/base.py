@@ -45,15 +45,15 @@ def log_info(func):
         if TRACK_TIME:
             timer.stop()  # Stop timer
 
-        LOGGER.info('\n{0}'.format(func.__name__))
+        LOGGER.info('\n%s', func.__name__)
         LOGGER.info('============================')
         if func.__doc__:
-            LOGGER.info('""" {0} """'.format(func.__doc__.strip()))
+            LOGGER.info('""" %s """', func.__doc__.strip())
         LOGGER.info('----------------------------')
         if result is not None:
             LOGGER.info(result)
         if TRACK_TIME:
-            LOGGER.info('done in {0} seconds'.format(timer.duration))
+            LOGGER.info('done in %s seconds', timer.duration)
         LOGGER.info('\n')
 
         return result
