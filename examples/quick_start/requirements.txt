@@ -1,5 +1,5 @@
 Django==1.7.4
-Pillow==2.7.0
+Pillow==6.2.0
 Unidecode==0.04.17
 argparse==1.2.1
 django-i18next==0.1
