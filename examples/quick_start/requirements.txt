@@ -1,4 +1,4 @@
-Django==1.7.4
+Django==1.11.28
 Pillow==2.7.0
 Unidecode==0.04.17
 argparse==1.2.1
